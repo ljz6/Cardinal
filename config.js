@@ -1,4 +1,4 @@
-export const baseUrl = "112.74.58.254:8080"
+export const baseUrl = "47.115.203.69:8080"
 
 
 			// initWebSocket: function (userId,sessionId) {

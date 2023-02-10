@@ -6,7 +6,7 @@
 					<image class="tu" :src="tuurl"></image>
 				</view>
 				<view class="title flex padding justify-center"><text>AtnibamAitay</text></view>
-				<view class="title1 flex padding justify-center"><input type="text" placeholder="请输入邮箱号进行登录" v-model="email"></input>
+				<view class="title1 flex padding justify-center"><input type="text" placeholder="请输入邮箱号进行登录" v-model="email" style="width: 88%;text-align: center;"></input>
 				</view>
 				<!-- <button @tap="getCode" >获取验证码</button>
 				<view class="title1 flex padding justify-center">
@@ -15,6 +15,7 @@
 				<view class=" flex padding justify-center "><button class="round title2" @click="goToindex"><text class="title3">CARDINAL</text>
 				<text class="title4">，启动！</text>
 				</button></view>
+			
 			</view>
 		</view>
 	</view>
@@ -24,8 +25,9 @@
 	export default {
 		data() {
 			return {
-				email: "",
+				email: "atnibamaitay@gmail.com",
 				verifyCode:'',
+				isEdit: false, //是否处于编辑状态
 				code:'',
 				// email: '',
 				tuurl: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big10001.jpg',
@@ -45,11 +47,12 @@
 		// 	}
 		// },
 		methods:{
-			goToindex(){
-				uni.navigateTo({
-					url:'/pages/index/index'
-				})
-			}
+		
+			// goToindex(){
+			// 	uni.navigateTo({
+			// 		url:'/pages/index/index'
+			// 	})
+			// }
 			// 获取验证码
 			// getCode() {
 			// 	let that = this
@@ -88,42 +91,46 @@
 			// 	}
 			
 			// },
-			// goToindex() {
-			// 	let that = this
-			// 	uni.request({
-			// 		url: that.$baseUrl + "/user/loginByEmail" +that.email,
-			// 		method:'POST',
-			// 		// data: {
-			// 		// 	email: that.email	,
-			// 		// 	// verifyCode :that.verifyCode 
-			// 		// 	// email: "826697618@qq.com",
-			// 		// 	// code:"655810"
-			// 		// },
-			// 		header:{
-			// 			'Content-Type':'application/json'
-			// 		},
-			// 		success(res) {
-			// 			console.log(res)
-			// 			// 登录验证是否成功
-			// 			if (res.data.status != '200') {
-			// 				uni.showToast({
-			// 					title: res.data.msg,
-			// 					icon: 'fail'
-			// 				});
-			// 			} else {
-			// 				uni.showToast({
-			// 					title: res.data.msg,
-			// 					icon: 'success'
-			// 				});
-			// 			}
-			
-			
-			// 		},
-			// 		fail(err) {
-			// 			console.log(err)
-			// 		}
-			// 	})
-			// },
+			goToindex() {
+				let that = this
+				uni.request({
+					url: that.$baseUrl + "/user/loginByEmail/?email= " +that.email ,
+					method:'POST',
+					data: {
+						email: that.email	,
+						// verifyCode :that.verifyCode 
+						// email: "826697618@qq.com",
+						// code:"655810"
+					},
+					header:{
+						'Content-Type':'application/json'
+					},
+					success(res) {
+						console.log(res)
+						// 登录验证是否成功
+						if (res.data.status != '200') {
+							uni.showToast({
+								title: res.data.msg,
+								icon: 'fail'
+							});
+						} else {
+							uni.showToast({
+								title: res.data.msg,
+								icon: 'success'
+							});
+							uni.navigateTo({
+								url:'/pages/index/index'
+							})	
+							
+							
+							
+						}
+					},
+					fail(err) {
+						console.log(err)
+					}
+				})
+			},
 		}
 	}
 </script>
@@ -156,7 +163,8 @@
 	.contact {
 		background-color: #171717;
 		width: 26%;
-		// height: 164px;
+		// height: 20%;
+		height: 380px;
 		justify-content: center;
 		border-radius: 10px;
 		text-align: left;
@@ -166,9 +174,9 @@
 
 	.tu {
 		border-radius: 50%;
-		height: 60px;
-		width: 60px;
-		margin-top: 60px;
+		height: 80px;
+		width: 80px;
+		margin-top: 76px;
 	}
 
 	.title {
