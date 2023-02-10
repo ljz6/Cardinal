@@ -71,11 +71,11 @@
     "vueVersion" : "2",
 	"h5" : {
 	    "devServer" : {
-	        "port" : 8080, //端口号
+	        "port" : 8082, //端口号
 	        "disableHostCheck" : true,
 	        "proxy" : {
 	            "/api" : {
-	                "target" : "http://112.74.58.254:8080/",
+	                "target" : "http://47.115.203.69:8080/",
 	                "changeOrigin" : true,
 	                "secure" : false,
 	                "pathRewrite" : {

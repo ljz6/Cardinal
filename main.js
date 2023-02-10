@@ -11,10 +11,10 @@ if (process.env.NODE_ENV === 'development') {
 	Vue.prototype.$baseUrl = "/api"
 	// #endif
 	// #ifdef APP-PLUS ||MP
-	Vue.prototype.$baseUrl = "http://112.74.58.254:8080"
+	Vue.prototype.$baseUrl = "http://47.115.203.69:8080"
 	// #endif
 } else {
-	Vue.prototype.$baseUrl = "http://112.74.58.254:8080"
+	Vue.prototype.$baseUrl = "http://47.115.203.69:8080"
 }
 const app = new Vue({
     ...App
