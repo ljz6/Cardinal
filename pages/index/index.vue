@@ -31,7 +31,7 @@
 				</view>
 			</view>
 			<view class="cu-modal drawer-modal justify-end" :class="modalName=='DrawerModalR'?'show':''">
-				<view class="button2 flex  justify-center align-center justify-between padding" @tap.stop="">
+				<view class="button2 flex  justify-center align-center justify-between padding" @tap.stop="" v-if="!isEdit">
 					<image :src="url00" style="width: 30px; height: 30px;" @tap="hideModal"></image>
 					<image :src="url1" style="height: 30px; width: 30px;" @tap="showModal1" data-target="Modal1"></image>
 					<image :src="url2" style="height: 30px; width: 30px;" v-if="!isEdit" @tap="editContent"></image>
@@ -39,6 +39,11 @@
 					<image :src="url4" style="height: 30px; width: 30px;" @click="goTopython" v-model="fileName">
 					</image>
 					<image :src="url5" style="height: 30px; width: 30px;" @click="goBackTologin"></image>
+				</view>
+				<view class="button22 flex  justify-center align-center justify-between padding" @tap.stop="" v-if="isEdit">
+					<image :src="url7" style="width: 30px; height: 30px;" ></image>
+					<image :src="url8" style="height: 30px; width: 30px;" ></image>
+					<image :src="url9" style="height: 30px; width: 30px;" ></image>
 				</view>
 			</view>
 			<view class="cu-modal" :class="modalName1=='Modal1'?'show':''">
@@ -85,29 +90,43 @@
 			</view>
 			</view>
 			<view>
-				<view v-if="tabContentId == websiteTypeId">
-					<checkbox-group @change="CheckboxChange1">
+				<view v-if="tabContentId == websiteTypeId" >
+					<checkbox-group @change="CheckboxChange1" >
+						
 					<view class=" flex  grid  col-5   ">
+					
 						<view class="padding-xs" v-for="(item,index) in websiteListdata" :key="item.id">
+								
 							<view v-if="item.accessRequirement==0">
-								<view class="radius  padding btn1" hover-class="bg-click1">
+								<view class="radius  padding btn1 flex justify-between justify-center align-center" hover-class="bg-click1">
 									<text class=" title1 "
 										@click="goTogetWebsiteName(item.url)">{{item.websiteName}}</text>
+										<!-- #ifndef MP-ALIPAY -->
+										<radio class='radio blue' v-if="isEdit" :class="radio=='B'?'checked':''" :checked="radio=='B'?true:false" value="B"></radio>
+								<!-- #endif -->
+								
 								</view>
 							</view>
 							<view v-if="item.accessRequirement==1">
-								<view class="radius padding btn2" hover-class="bg-click2">
+								<view class="radius padding btn2 flex justify-between justify-center align-center" hover-class="bg-click2">
 									<text class=" title2 "
 										@click="goTogetWebsiteName(item.url)">{{item.websiteName}}</text>
+								<!-- #ifndef MP-ALIPAY -->
+										<radio class='radio blue' v-if="isEdit" :class="radio=='B'?'checked':''" :checked="radio=='B'?true:false" value="B"></radio>
+								<!-- #endif -->
 								</view>
 							</view>
 							<view v-if="item.accessRequirement==2">
-								<view class="radius padding btn3" hover-class="bg-click3">
+								<view class="radius padding btn3 flex justify-between justify-center align-center" hover-class="bg-click3">
 									<text class=" title3 "
 										@click="goTogetWebsiteName(item.url)">{{item.websiteName}}</text>
+										<!-- #ifndef MP-ALIPAY -->
+												<radio class='radio blue' v-if="isEdit" :class="radio=='B'?'checked':''" :checked="radio=='B'?true:false" value="B"></radio>
+										<!-- #endif -->
 								</view>
 							</view>
 						</view>
+						
 					</view>
 					</checkbox-group>
 				</view>
@@ -132,6 +151,17 @@
 				checked: true,
 				fileName: '',
 				isEdit: false, //是否处于编辑状态
+					radio: 'B',
+				checkbox: [{
+					value: 'A',
+					checked: true
+				}, {
+					value: 'B',
+					checked: true
+				}, {
+					value: 'C',
+					checked: false
+				}],
 				FormData: {
 					accessRequirement: '',
 					url:'',
@@ -147,6 +177,9 @@
 				url4: '/static//nav/thumb.png',
 				url5: '/static//nav/out.png',
 				url6: '/static//nav/refresh.png',
+				url7: '/static//nav/can.png',
+				url8: '/static//nav/yes.png',
+				url9: '/static//nav/no.png',
 				modalName: null,
 				url: '',
 				modalName1: null,
@@ -190,6 +223,9 @@
 				// uni.navigateTo({
 				// 	url:"/pages/service/sidebar/content/manage"
 				// })
+			},
+			RadioChange(e) {
+				this.radio = e.detail.value
 			},
 			CheckboxChange1(e) {
 				var items = this.videocollectionList 
@@ -612,6 +648,17 @@
 		width: 300px;
 		height: 46px;
 
+		background-color: #171717;
+		border-radius: 30px 0px 0px 30px;
+		transition: all linear 2s;
+		position: absolute;
+		margin-top: 52px;
+		transform: translateX(-5px);
+	}
+	.button22 {
+		width: 200px;
+		height: 46px;
+	
 		background-color: #171717;
 		border-radius: 30px 0px 0px 30px;
 		transition: all linear 2s;
